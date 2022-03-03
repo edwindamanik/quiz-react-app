@@ -1,10 +1,11 @@
 import React, { useEffect, useState } from 'react';
 import Questions from '../Questions/Questions.component';
 
-const Quiz = () => {
+function Quiz() {
 
   const [quiz, setQuiz] = useState([]);
   const [order, setOrder] = useState(0);
+  const [count, setCount] = useState(0);
 
   const shufQuiz = (arr) => arr.sort(() => Math.random() - 0.5);
   const [point, setPoint] = useState(0);
@@ -16,6 +17,7 @@ const Quiz = () => {
       setPoint(point + 1)
     }
     
+    setCount(count + 1)
     setOrder(order + 1)
   }
 
@@ -32,12 +34,11 @@ const Quiz = () => {
   }, [])
 
   return(
-    <div className='flex h-screen justify-center items-center'>
-      {
-        quiz.length > 0 ? <Questions quiz={quiz} order={order} checkResult={checkResult} point={point} /> : <p className='text-black font-bold text-lg'>Loading ...</p>
-      }
-      {console.log(order)}
-    </div>
+      <div className='flex h-screen justify-center items-center'>
+        {
+          quiz.length > 0 ?  <Questions quiz={quiz} order={order} count={count} setOrder={setOrder} checkResult={checkResult} point={point} /> : <p className='text-black font-bold text-lg'>Loading ...</p>
+        }
+      </div>
   )
 }
 
